@@ -1,5 +1,5 @@
 ---
-title: "June 2015 Top500, Green500, and Exascalar"
+title: "June 2015 Exascalar"
 author: "Winston Saunders"
 date: "Sept 16, 2015"
 output: 
@@ -13,26 +13,23 @@ output:
 
 #Summary
 
-While the #1 performing supercomputer in the Top500 has not changed in the last _five_ publications of the Top500 list (since Jun 2013), the population of the Top500 and Green500 list has been far from stagnant.  
+While the #1 performing supercomputer in the Top500 has not changed in the last _five_ publications of the Top500 list (since Jun 2013), the population of the top supercomputers has been far from stagnant. The computer at the top of the efficiency mark, the #1 Green500 computer has changed with every publication.  
 
-Exascalar explores the full richness of this data thru simple "data visuaization" which in this case is a fancy name for plotting. 
+Exascalar explores the full richness of the Top500 and Green500 supercomputers using intuitive "data visuaization" techiques. By seeing how and where changes occur, we can gain deeper insight into trends which are helpful in understanding what lies ahead. 
  
-Several new analyses, suggested by others thru email and twitter, have been added. Notably, graphs looking at core counts and GPU architecture reveal insights into differentiation among different super computers. 
+This analysis contains the usual Exasclat plot, showing change between the June 2015 lists and the Novmber2014 lists. It also contains compares the Top Exascalar systems and looks at the role of core counts and GPU's.
 
+##Background and notes
 
-##Reach me
-While source code is made freely available on Github, I welcome suggestions for additional anlayses (or even half-baked experiments) which might be of interest. You can reach me via twitter [\@WinstonOnEnergy](https://twitter.com/WinstonOnEnergy)
-
-##Disclaimer
-This analysis is done independently and reflects my opinions alone. In particular, it in no way reflects opinions of my employer (Intel Corporation) or any other entity with which I'm affiliated.
-
-##Background
 
 Supercomputer leadership requires both extreme scale and high efficiency. The [Green500](http:\\green500.org) and [Top500](http:\\top500.org) lists are excellent resources for understanding this. But they are both, well, lists, which makes it hard to recognize trends and correlations. 
 The approach here is to leverage data visualization techniques to explore some of the richness of the combined high quality data contained in both lists. While the Top500 emphasizes highest performance, and the Gree500 emphasizes the highest efficiency, [Exascalar](http://www.datacenterknowledge.com/archives/2012/07/10/june-2012-exascalar-efficiency-dominates-hpc/) analysis is conceived as a way to visualize supercomputer efficiency and performance in one coherent picture. 
 
 The name Exascalar originates from the goal of achieving an exaflops, $10^{12}$ mflops, in an envelope of $20$ MWatt. Exascalar is a logarithmic parametric indicator of progress in efficiency and performance along an iso-power line toward this goal. You can actually [Google it](http://www.google.com/webhp?hl=en#safe=off&hl=en&q=Exascalar). 
 
+While source code is made freely available on Github, I welcome suggestions for additional anlayses (or even half-baked experiments) which might be of interest. You can reach me via twitter [\@WinstonOnEnergy](https://twitter.com/WinstonOnEnergy)
+
+This analysis is done independently and reflects my opinions alone. In particular, it in no way reflects opinions of my employer (Intel Corporation) or any other entity with which I'm affiliated.
 
 #June 2015 Exascalar 
 
@@ -56,10 +53,7 @@ The name Exascalar originates from the goal of achieving an exaflops, $10^{12}$ 
 
 ```{r, echo=FALSE, warning=FALSE}
 
-#         file.path <- "https://raw.githubusercontent.com/ww44ss/public_art/master/"
-#         data.file <- "public_art_edited.csv"
-#         data.zip <- "public_art.zip"
-#         missing.types <- c("NA", "")
+#         
     
 ```
 
@@ -70,16 +64,24 @@ The name Exascalar originates from the goal of achieving an exaflops, $10^{12}$ 
 
 ## GET THE CLEANED DATA
 
-    ##check for Exascalar Directory. If none exists stop program with error
-    ##check to ensure results director exists
-
-    if(getwd()!="/Users/winstonsaunders/Documents/Exascalar") setwd("/Users/winstonsaunders/Documents/Exascalar")
-
-    #if(!file.exists("./results")) stop("Data not found in directory Exascalar, first run Exascalar_Cleaner to get tidy data")
+    ##This program pulls the cleaned data from github directly
 
 
-    ## set working directory
+    file.path <- "https://raw.githubusercontent.com/tactical-Data/Exascalar"
 
+    ##define file-reading function
+    
+    library(RCurl)
+        
+    readData <- function(path.name, file.name, column.types, missing.types)
+        {
+                ## create URL from path and file names
+                myData<-getURL(paste0(path.name, file.name) )
+                ## read the data
+                read.csv(textConnection(myData),
+                colClasses=column.types,
+                na.strings=missing.types )
+}
 
 # define Data Directories to use
 results <- "./results"
