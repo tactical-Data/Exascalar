@@ -67,24 +67,26 @@ This analysis is done independently and reflects my opinions alone. In particula
     ##This program pulls the cleaned data from github directly
 
 
-    file.path <- "https://raw.githubusercontent.com/tactical-Data/Exascalar"
+    file.path <- "https://raw.githubusercontent.com/tactical-Data/Exascalar/master"
 
     ##define file-reading function
     
     library(RCurl)
         
-    readData <- function(path.name, file.name, column.types, missing.types)
+    readData <- function(path.name, dir.extension = "",file.name)
         {
                 ## create URL from path and file names
-                myData<-getURL(paste0(path.name, file.name) )
+            print(paste0(path.name, dir.extension, file.name))
+                myData<-getURL(paste0(path.name, dir.extension, file.name) )
                 ## read the data
-                read.csv(textConnection(myData),
-                colClasses=column.types,
+                a<-read.csv(textConnection(myData),
                 na.strings=missing.types )
-}
+                
+                return(a)
+                }
 
 # define Data Directories to use
-results <- "./results"
+
 
 ## ------------------------
 ## Read results files
@@ -93,6 +95,11 @@ results <- "./results"
 
 ## there are probably ways to simplify this code but this brute force method is easy to read.
 
+    missing.types<-c("", "NA")
+    
+    BigEx<-readData(path.name=file.path, dir.extension = "/results", file.name="/BigExascalar.csv")
+    
+    
 BigEx <- read.csv(paste0(results, "/BigExascalar.csv"), header=TRUE)
 Jun15 <- read.csv(paste0(results, "/Jun15_merged.csv"), header=TRUE)
 Jun15$Date<-rep("Jun 2015", nrow(Jun15))
