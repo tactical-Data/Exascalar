@@ -50,13 +50,6 @@ This analysis is done independently and reflects my opinions alone. In particula
 ```
 
 
-
-```{r, echo=FALSE, warning=FALSE}
-
-#         
-    
-```
-
 ```{r, echo=FALSE}
 
 ## This program imports cleaned data from the Green500 and Top500 lists
@@ -76,49 +69,38 @@ This analysis is done independently and reflects my opinions alone. In particula
     readData <- function(path.name, dir.extension = "",file.name)
         {
                 ## create URL from path and file names
-            print(paste0(path.name, dir.extension, file.name))
                 myData<-getURL(paste0(path.name, dir.extension, file.name) )
+                
                 ## read the data
-                a<-read.csv(textConnection(myData),
-                na.strings=missing.types )
+                a<-read.csv(textConnection(myData), na.strings=missing.types )
                 
                 return(a)
                 }
 
-# define Data Directories to use
 
 
-## ------------------------
-## Read results files
+    ## READ DATA
+    ## ------------------------
 
-# import data set
-
-## there are probably ways to simplify this code but this brute force method is easy to read.
-
+    ## define missing types
     missing.types<-c("", "NA")
     
+    ## Imprt data from Github
     BigEx<-readData(path.name=file.path, dir.extension = "/results", file.name="/BigExascalar.csv")
+    Jun15<-readData(path.name=file.path, dir.extension = "/results", file.name="/Jun15_merged.csv")
+    Nov14<-readData(path.name=file.path, dir.extension = "/results", file.name="/Nov14_merged.csv")
+    Nov12<-readData(path.name=file.path, dir.extension = "/results", file.name="/Nov12_merged.csv")
+    Jun14<-readData(path.name=file.path, dir.extension = "/results", file.name="/Jun14_merged.csv")
+    Jun13<-readData(path.name=file.path, dir.extension = "/results", file.name="/Jun13_merged.csv")
     
+
+    ## Add some date identifiers to the data
     
-BigEx <- read.csv(paste0(results, "/BigExascalar.csv"), header=TRUE)
-Jun15 <- read.csv(paste0(results, "/Jun15_merged.csv"), header=TRUE)
-Jun15$Date<-rep("Jun 2015", nrow(Jun15))
-
-Nov14 <- read.csv(paste0(results, "/Nov14_merged.csv"), header=TRUE)
-Jun14 <- read.csv(paste0(results, "/Jun14_merged.csv"), header=TRUE)
-Nov12 <- read.csv(paste0(results, "/Nov12_merged.csv"), header=TRUE)
-Jun13 <- read.csv(paste0(results, "/Jun13_merged.csv"), header=TRUE)
-
-
-
-
-## Add some date identifiers to the data
-
-
-Nov14$Date<-rep("Nov 2015", nrow(Nov14))
-Jun14$Date<-rep("Jun 2014", nrow(Jun14))
-Nov12$Date<-rep("Nov 2012", nrow(Nov12))
-Jun13$Date<-rep("Jun 2013", nrow(Jun13))
+    Jun15$Date<-rep("Jun 2015", nrow(Jun15))
+    Nov14$Date<-rep("Nov 2015", nrow(Nov14))
+    Jun14$Date<-rep("Jun 2014", nrow(Jun14))
+    Nov12$Date<-rep("Nov 2012", nrow(Nov12))
+    Jun13$Date<-rep("Jun 2013", nrow(Jun13))
 
 
 ```
@@ -638,15 +620,15 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
     
     ## CREATE EXASCALAR PLOT
     ## take the log of the data points explicitly rather than use a log-scale command
-    p <- ggplot(BigData, aes(x=log10(mflopswatt), y=log10(rmax*10^3), color=coressocket.t))
+    p <- ggplot(BigData, aes(x=log10(mflopswatt), y=log10(rmax*10^3), size=log10(coressocket.t)))
     
     p <- p + facet_grid(.~Date)
                 
     
     ## Define plot points and symbols
     ## alpha = 0.8 helps visually recognize where points overlap
-    p <- p + geom_point(alpha=0.8, size=3, pch=20)
-    p <- p + scale_color_gradient(name="Cores Per Socket", low="blue2", high="red", na.value="grey50")
+    p <- p + geom_point(alpha=0.8, color = "chocolate4", pch=20)
+    #p <- p + scale_color_gradient(name="Cores Per Socket", low="blue2", high="red", na.value="grey50")
     
 
     ## set plot theme
@@ -671,7 +653,7 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
     ## add axis scale labels and title
     p <- p + scale_x_discrete(breaks = 1:5, labels=c("1e+01","1e+02","1e+03","1e+04","1e+05")) 
     p <- p + scale_y_discrete(breaks = 8:12, labels=c("1e+08","1e+09","1e+10","1e+11","1e+12")) 
-    p <- p + ggtitle("June 2015 and November 2012 Exascalar (Cores Per Socket)")
+    p <- p + ggtitle("Jun 2015 and Nov 2012 Exascalar (Log10(Cores Per Socket))")
 
     ## annotate source
 
