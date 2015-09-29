@@ -64,7 +64,7 @@ Exascalar, as visulaized by above, is descriptive of the _population_ of superco
 
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Tue Sep 29 08:17:56 2015 -->
+<!-- Tue Sep 29 08:26:48 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Exa Rank </th> <th> Exascalar </th> <th> Performance Rank </th> <th> Efficiency Rank </th> <th> rmax (mflops) </th> <th> power (kW) </th> <th> efficiency (mflops/Watt) </th>  </tr>
   <tr> <td align="right"> Top Exascalar </td> <td align="right">   1 </td> <td align="right"> -2.04 </td> <td align="right">   1 </td> <td align="right">  83 </td> <td align="right"> 33862700.00 </td> <td align="right"> 17808.00 </td> <td align="right"> 1901.54 </td> </tr>
@@ -105,7 +105,7 @@ th, td {
 
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Tue Sep 29 08:17:56 2015 -->
+<!-- Tue Sep 29 08:26:48 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Exa Rank </th> <th> Exascalar </th> <th> Performance Rank </th> <th> Efficiency Rank </th> <th> rmax (mflops) </th> <th> power (kW) </th> <th> efficiency (mflops/Watt) </th>  </tr>
   <tr> <td align="right"> Top Exascalar </td> <td align="right">   7 </td> <td align="right"> -2.59 </td> <td align="right">   7 </td> <td align="right">  75 </td> <td align="right"> 5536990.00 </td> <td align="right"> 2834.00 </td> <td align="right"> 1953.77 </td> </tr>

@@ -612,6 +612,8 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
 
 ## EXASCALAR PLOT
 
+    ##elimated the 60 core from Jun15
+    Jun15$coressocket.t[Jun15$coressocket.t==60]<-6
 
     ## Make sure both dataframes have the same columns
     common_columns <- intersect(names(Jun15), names(Nov12))
@@ -620,15 +622,15 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
     
     ## CREATE EXASCALAR PLOT
     ## take the log of the data points explicitly rather than use a log-scale command
-    p <- ggplot(BigData, aes(x=log10(mflopswatt), y=log10(rmax*10^3), size=log10(coressocket.t)))
+    p <- ggplot(BigData, aes(x=log10(mflopswatt), y=log10(rmax*10^3), color=coressocket.t))
     
     p <- p + facet_grid(.~Date)
                 
     
     ## Define plot points and symbols
     ## alpha = 0.8 helps visually recognize where points overlap
-    p <- p + geom_point(alpha=0.8, color = "chocolate4", pch=20)
-    #p <- p + scale_color_gradient(name="Cores Per Socket", low="blue2", high="red", na.value="grey50")
+    p <- p + geom_point(alpha=0.8, size=3, pch=20)
+    p <- p + scale_color_gradient(name="Cores Per Socket", low="blue2", high="red", na.value="grey50")
     
 
     ## set plot theme
@@ -645,6 +647,7 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
         legend.position="bottom"
         )
 
+    
 
     ##Set plot dimensions and label axes
     p <- p + coord_cartesian(xlim = c(.9, 5.1), ylim=c(7.5, 12.5)) 
@@ -653,7 +656,7 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
     ## add axis scale labels and title
     p <- p + scale_x_discrete(breaks = 1:5, labels=c("1e+01","1e+02","1e+03","1e+04","1e+05")) 
     p <- p + scale_y_discrete(breaks = 8:12, labels=c("1e+08","1e+09","1e+10","1e+11","1e+12")) 
-    p <- p + ggtitle("Jun 2015 and Nov 2012 Exascalar (Log10(Cores Per Socket))")
+    p <- p + ggtitle("Jun 2015 and Nov 2012 Exascalar (Cores Per Socket)")
 
     ## annotate source
 
