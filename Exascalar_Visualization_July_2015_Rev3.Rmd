@@ -33,21 +33,6 @@ This analysis is done independently and reflects my opinions alone. In particula
 
 #June 2015 Exascalar 
 
-```{r "readData function", echo=FALSE}        
-#         ## define a read_data function which will be used to pull data from my gitbhub acct
-#         ## 
-#         library(RCurl)
-#         readData <- function(path.name, file.name, column.types, missing.types) {
-#                 ## create URL from path and file names
-#                 myData<-getURL(paste0(path.name, file.name) )
-#                 ## read the data
-#                 read.csv(textConnection(myData),
-#                 colClasses=column.types,
-#                 na.strings=missing.types )
-#                 
-#             }
-
-```
 
 
 ```{r, echo=FALSE}
@@ -599,14 +584,14 @@ We can also look at progress of the top systems along the Exascalar parameter. N
 
 ```
 
-##Technology Trends
+#Technology Trends
 
 In this section we visually explore different influencers of the supercomputer populations. Some of these graphs were "requests" and others are just interesting. 
 
-###Cores Per Socket
+##Cores Per Socket
 
-This graph, showing the the side by side comparison of the November 2012 and current June 2015 plots shows clearly the evolution in cores per socket as a shift to redder data points in the latter graph. This encodes the __coressocket__ data from the Top500 list.  
-Te side-by-side comparison here also highlights how the IBM Power systems, so dominant in both efficiency and performance, in the Novermber 2012 list, have been matched and now exceeded by alternative architectures. In particular, the role of GPU and GPU architecture will become apparent in the analysis below.  
+This graph, showing the the side by side comparison of the June 2013 and current June 2015 plots shows the evolution in cores per socket as a shift to redder data points in the latter graph. This encodes the __coressocket__ data from the Top500 list.  
+The side-by-side comparison here also highlights how the IBM Power systems, so dominant in both efficiency and performance, in the Novermber 2012 list, have been matched and now exceeded by alternative architectures. In particular, the role of GPU and GPU architecture will become apparent in the analysis below.  
 
 ```{r, echo=FALSE, fig.align='center', fig.height=6.25, fig.width=8, warning=FALSE}
 
@@ -616,9 +601,9 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
     Jun15$coressocket.t[Jun15$coressocket.t==60]<-6
 
     ## Make sure both dataframes have the same columns
-    common_columns <- intersect(names(Jun15), names(Nov12))
+    common_columns <- intersect(names(Jun15), names(Jun13))
 
-    BigData<-rbind(Nov12[, common_columns],Jun15[, common_columns])
+    BigData<-rbind(Jun13[, common_columns],Jun15[, common_columns])
     
     ## CREATE EXASCALAR PLOT
     ## take the log of the data points explicitly rather than use a log-scale command
@@ -713,8 +698,103 @@ Te side-by-side comparison here also highlights how the IBM Power systems, so do
 
 ```
 
+###Core Count Histogram
 
-###Processor
+The steady shift in core count is shown clearly in the histrogram below. 
+
+
+```{r, echo=FALSE, fig.align='center', fig.height=4.25, fig.width=7, warning=FALSE}
+
+## EXASCALAR PLOT
+
+    ##elimated the 60 core from Jun15
+    Jun15$coressocket.t[Jun15$coressocket.t==60]<-6
+
+    ## Make sure both dataframes have the same columns
+    common_columns <- intersect(intersect(names(Jun15), names(Jun13)), names(Jun14))
+    ##combine columns
+    BigData<-rbind(Jun13[, common_columns],Jun14[, common_columns],Jun15[, common_columns])
+    
+    ## CREATE HISTOGRAM
+    
+    p <- ggplot(BigData, aes(coressocket.t, fill=Date))
+    
+    #p <- p + facet_grid(.~Date)
+                
+    
+    ## Define plot points and symbols
+    ## alpha = 0.8 helps visually recognize where points overlap
+    p <- p + geom_histogram(breaks=seq(0, 40, by =4), 
+                 col="blue2", 
+                 position="dodge")
+    
+
+    ## set plot theme
+    p <- p + theme(
+        axis.text=element_text(size=12, color="black"),
+        axis.title=element_text(size=14), 
+        plot.title = element_text(size=16, face="bold", vjust=2),
+        panel.background = element_rect(fill = 'antiquewhite1'),
+        axis.title.x = element_text(color="black", vjust=-0.45),
+        axis.title.y = element_text(color="black" , vjust=0.45),
+        panel.grid.major = element_line(colour = "antiquewhite"),
+        panel.grid.minor = element_line(colour = "antiquewhite"),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position="bottom"
+        )
+
+    p<-p+labs(x="Cores", y="Count")
+
+    p <- p + ggtitle("Core Count Shift by Year")
+    
+    p <- p + scale_fill_manual(values=c("lightblue3", "lightseagreen", "indianred3"))
+
+    
+
+    ## annotate source
+
+    p <- p + annotate("text", x = 34, y= 20, label = "sources:~Top500.org~and~Green500.org", parse=TRUE, angle=0, size=2.6)
+
+    
+  
+    ## print the graph
+    print(p)
+
+```
+
+###Table of Core Count mean
+
+As a summary statistic we can also look to the median and mean core counts of each list. While the median core count has not changed in the last two years, the steady change of the mean core count is plainly seen.
+
+
+```{r, echo=FALSE, results="asis", fig.align='center'}
+    
+    ## create table
+    ## note need to control for NA's in some cases
+    
+    core_stats_table<-matrix(c("Jun2013", 
+                               median(BigData$coressocket.t[BigData$Date=="Jun 2013"&!is.na(BigData$coressocket.t)]),
+                               mean(BigData$coressocket.t[BigData$Date=="Jun 2013"&!is.na(BigData$coressocket.t)]),
+                               "Jun2014", 
+                               median(BigData$coressocket.t[BigData$Date=="Jun 2014"]), 
+                               mean(BigData$coressocket.t[BigData$Date=="Jun 2014"]),
+                               "Jun2015", 
+                               median(BigData$coressocket.t[BigData$Date=="Jun 2015"]), 
+                               mean(BigData$coressocket.t[BigData$Date=="Jun 2015"])
+                               ), nrow=3, ncol=3, byrow=TRUE
+                             )
+    
+    core_stats_table<-as.data.frame(core_stats_table)
+    colnames(core_stats_table)<-c("Date", "Median Cores", "Mean Cores")
+    
+    temptable<-xtable(core_stats_table)
+    print(temptable, type="html")  
+    
+    
+    ```
+
+
+##Processor
 
 The processor plays a big role in the supercomputer. Here, to simplify, I have taken the __processorgeneration__ data and simplified it to capture only the manufacturer. The near ubiquity of Intel processors is evident.
 
@@ -825,7 +905,7 @@ The processor plays a big role in the supercomputer. Here, to simplify, I have t
 
 ```
 
-###Accelerator Co-Processor
+##Accelerator Co-Processor
 
 Encoding the __aceeleratorcoprocessor__ data from the Green500 list highlights interesting differentiation among different manufacturers very clearly. For the sake of clarity list elements have been reduced to just the manufacturer.
 
@@ -943,9 +1023,9 @@ Encoding the __aceeleratorcoprocessor__ data from the Green500 list highlights i
 
 ```
 
-###Total Number of Cores
+##Total Number of Cores
 
-Another interesting trend is the total number of cores. Since this is an extrinsic parameter, we encode the logarithm. Again, the shift up in performance, and the shift toward higher overall core count is apparent. The __totalcores__ data from the Top500 list are used.
+Another interesting trend is the total number of cores. Since this is an extrinsic parameter, it's best to encode the logarithm. Again, the shift up in performance, and the shift toward higher overall core count is apparent. The __totalcores__ data from the Top500 list are used.
 
 ```{r, echo=FALSE, fig.align='center', fig.height=6.25, fig.width=8, warning=FALSE}
 
@@ -953,9 +1033,9 @@ Another interesting trend is the total number of cores. Since this is an extrins
 
 
     ## Make sure both dataframes have the same columns
-    common_columns <- intersect(names(Jun15), names(Nov12))
+    common_columns <- intersect(names(Jun15), names(Jun13))
 
-    BigData<-rbind(Nov12[, common_columns],Jun15[, common_columns])
+    BigData<-rbind(Jun13[, common_columns],Jun15[, common_columns])
     
     
     ## CREATE EXASCALAR PLOT
@@ -1051,7 +1131,7 @@ Another interesting trend is the total number of cores. Since this is an extrins
 ```
 
 
-###Accelerator Processor Cores
+##Accelerator Processor Cores
 
 Here we can see where Accelerator Processors (GPUs) are making their way into the Top500 population. While high core count systems play an obvious role in high perfoormance, lower core counts have an interesting play at the high efficiency end (even if they have not yet achieved scale). Here the __acceleratorcoprocessor__ data from the Top500 are encoded.
 
@@ -1157,9 +1237,9 @@ Here we can see where Accelerator Processors (GPUs) are making their way into th
 
 #Summary
 
-While the #1 Supercomputer has remained unchanged for two years, the technology of supercomputing is undergoing rapid evolution. Based on historical trends, another push to higher performance seems overdue.  
+While the #1 Supercomputer has remained unchanged for two years, the technology of supercomputing is undergoing rapid evolution. Based on historical trends of the gap between the efficiency of the top peformance and the top efficiency systems, another push to higher performance seems imminent.  
 
-Cores per socket are driving a large part of the gains, while GPU architecture and total cores play an evident role in pushing to higher efficiency and greater performance.  
+An increase in the cores per socket is evident in the overall data, while GPU architecture and total cores play an strong role in pushing to higher efficiency and greater performance.  
 
 ##Final Query
 In looking at the Top500 and Green500 data thru the lens of Exascalar, systems with exascalar $\epsilon$ < -4.0 are technologically of little interest. Indeed, as time evolves, they are really just roadkill. Would it be more interesting and meaningful to include more advanced systems, perhaps with lower overall performance, but higher efficiency, rather than low efficiency, low performing systems, in an overall list of leading supercomputers? 
