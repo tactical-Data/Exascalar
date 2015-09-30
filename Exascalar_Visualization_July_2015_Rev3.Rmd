@@ -1,7 +1,7 @@
 ---
 title: "June 2015 Exascalar"
-author: "Winston Saunders"
-date: "Sept 16, 2015"
+author: "Winston A. Saunders"
+date: "29 Sept 2015"
 output: 
   html_document:
     keep_md: true
@@ -145,11 +145,11 @@ library(ggplot2)
         axis.text=element_text(size=14, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=18, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey92'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "grey92"),
-        panel.grid.minor = element_line(colour = "grey92")
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod")
         )
 
 
@@ -219,7 +219,7 @@ library(ggplot2)
 
 ###Reaching back: Comparing to June 2013
 
-To emphasize the massive changes in the population of the top supercomputers, it's instructive to compare not only to the last iteration, but also the last iteration where the #1 Supercomputer changed, two years ago in June 2013. In intervening years the minimum perforamnce needed to make the Top500 has increased over 50%. In addition, the maximum efficiency has increased by about the same magnitude. This neatly emphasizes why the _population_ holds as much (and perhaps more) interest as the top one or two systems. 
+To emphasize the massive changes in the population of the top supercomputers, it's instructive to compare not only to the last iteration, but also the last iteration where the #1 Supercomputer changed, two years ago in June 2013. In intervening years the minimum performance needed to make the Top500 has increased over 50%. In addition, the maximum efficiency has increased by about the same magnitude. This neatly emphasizes why the _population_ holds as much (and perhaps more) interest as the top one or two systems. 
 
 ```{r, echo=FALSE, fig.align='center', fig.height=7.25, fig.width=8}
 
@@ -259,11 +259,11 @@ To emphasize the massive changes in the population of the top supercomputers, it
         axis.text=element_text(size=14, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=18, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey92'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "grey92"),
-        panel.grid.minor = element_line(colour = "grey92")
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod")
         )
 
 
@@ -331,6 +331,111 @@ To emphasize the massive changes in the population of the top supercomputers, it
 
 ```
 
+###Year of Appearance
+
+Finally, the year systems were added to the list shows that the evolution of both the Top500 and Green500 is far less uniform within the population. In teh graph below the newest systems, rather than being clutered at highest efficiency and performance, are distributed more or less uniformly throughout the population. And while the cluster of high power top performance systems are getting a little long in the tooth, there are serveral newer systems with powers over 2.0 MWatt with lower than peak efficiency. 
+
+```{r, echo=FALSE, fig.align='center', fig.height=7.25, fig.width=7.75, warning=FALSE}
+
+## EXASCALAR PLOT
+
+
+    BigData<-Jun15
+    
+    ## CREATE EXASCALAR PLOT
+    ## take the log of the data points explicitly rather than use a log-scale command
+    p <- ggplot(BigData, aes(x=log10(mflopswatt), y=log10(rmax*10^3), color=factor(year.t)))
+    
+    
+    ## Define plot points and symbols
+    ## alpha = 0.8 helps visually recognize where points overlap
+    p <- p + geom_point(alpha=0.9, size=5, pch=20)
+    p <- p + scale_color_manual(values = rainbow(10))
+    
+
+    ## set plot theme
+    p <- p + theme(
+        axis.text=element_text(size=14, color="black"),
+        axis.title=element_text(size=14), 
+        plot.title = element_text(size=18, face="bold", vjust=2),
+        panel.background = element_rect(fill = 'palegoldenrod'),
+        axis.title.x = element_text(color="black", vjust=-0.45),
+        axis.title.y = element_text(color="black" , vjust=0.45),
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position="right"
+        )
+    
+    
+
+    
+
+    ##Set plot dimensions and label axes
+    p <- p + coord_cartesian(xlim = c(.9, 5.1), ylim=c(7.5, 12.5)) 
+    p<-p+labs(x="Efficiency (MFlops/Watt)", y="Performance (Mflops)")
+
+    ## add axis scale labels and title
+    p <- p + scale_x_discrete(breaks = 1:5, labels=c("1e+01","1e+02","1e+03","1e+04","1e+05")) 
+    p <- p + scale_y_discrete(breaks = 8:12, labels=c("1e+08","1e+09","1e+10","1e+11","1e+12")) 
+    p <- p + ggtitle("Jun 2015 Exascalar (Year of Appearance)")
+
+    ## annotate source
+
+    p <- p + annotate("text", x = 3.9, y= 7.6, label = "sources:~Top500.org~and~Green500.org", parse=TRUE, angle=0, size=3)
+
+    ## add Epsilon values for Exascalar
+    p <- p + annotate("text", x=4.64, y= 12.2, label = "epsilon == 0", parse=TRUE, angle= -45, size=4)
+    p <- p + annotate("text", x=3.44, y= 12.1, label = "epsilon == -1", parse=TRUE, angle= -45, size=4)
+    p <- p + annotate("text", x=2.08, y= 12, label = "epsilon == -2", parse=TRUE, angle= -45, size=4)
+    p <- p + annotate("text", x=1.30, y= 11.40, label = "epsilon == -3", parse=TRUE, angle= -45, size=4)
+    p <- p + annotate("text", x=1.18, y= 10.11, label = "epsilon == -4", parse=TRUE, angle= -45, size=4)
+
+    ## add Power annotation
+    p <- p + annotate("text", x=4.18, y= 11.70, label = "20 MWatt", parse=F, angle= 45, size=4)
+    p <- p + annotate("text", x=4.58, y= 11.10, label = "2.0 MWatt", parse=F, angle= 45, size=4)
+    p <- p + annotate("text", x=4.58, y= 10.10, label = "0.2 MWatt", parse=F, angle= 45, size=4)
+    p <- p + annotate("text", x=4.58, y= 9.10, label = "20 kWatt", parse=F, angle= 45, size=4)
+
+    ## Add POWER AND EXASCALAR Lines
+
+    ## define powerline function as a function of megawatts
+    isopowerline_ab <- function(megawatts)
+        {a<-log10(megawatts*10^6)  #*sqrt(2)
+        return(a)
+        }
+  
+    ## compute Exascale
+    LogExaPerf <- log10(10^12)              ##in Megaflops
+    LogExaEff  <- log10(10^12/(20*10^6))    ##in Megaflops/Watt
+    
+    LogExascale = LogExaPerf+LogExaEff
+    
+    ## define exascalar line function as a function of Exascalar value
+    
+    isoexaline_ab <- function(exascalar)
+        {
+        a <- LogExascale+exascalar*((sqrt(2)))
+        return(a)
+        }
+    
+    ## draw the power lines
+    for (i in -1:2){
+    p <- p + geom_abline(intercept=isopowerline_ab(2*10^-i), colour = "darkblue", size = 0.5, alpha=0.5, linetype=2)
+    }
+    #print(p)
+    
+    ##draw the exascalar lines
+    for (i in 0:7) {
+        p <- p + geom_abline(intercept = isoexaline_ab(-i), slope=-1, colour = "darkblue", size = 0.5, alpha=0.5, linetype=2)
+    }
+  
+    ## print the graph
+    print(p)
+
+```
+
+
 ##Key Indicators June 2015 Lists
 
 Exascalar, as visulaized by above, is descriptive of the _population_ of supercomputers. Here ia a list of some of the key systems. Note that Exascalar spans from the highest performance to the lowest efficiency system.
@@ -397,8 +502,9 @@ table {
     font: 12px arial, sans-serif;
 }
 th, td {
-    
+    border: 2px solid black;
     padding: 5px;
+    text-align: center;
 }
 </style>
 
@@ -487,7 +593,7 @@ THe trend of the Efficiency of the #1 Top500 and the T #1 Green500 lists is inte
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey90'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
         panel.grid.major = element_line(colour = "white"),
@@ -562,7 +668,7 @@ We can also look at progress of the top systems along the Exascalar parameter. N
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey90'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
         panel.grid.major = element_line(colour = "white"),
@@ -623,11 +729,11 @@ The side-by-side comparison here also highlights how the IBM Power systems, so d
         axis.text=element_text(size=10, color="black"),
         axis.title=element_text(size=10), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey92'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "grey92"),
-        panel.grid.minor = element_line(colour = "grey92"),
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -734,7 +840,7 @@ The steady shift in core count is shown clearly in the histrogram below.
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=16, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'antiquewhite1'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
         panel.grid.major = element_line(colour = "antiquewhite"),
@@ -764,10 +870,10 @@ The steady shift in core count is shown clearly in the histrogram below.
 
 ###Table of Core Count mean
 
-As a summary statistic we can also look to the median and mean core counts of each list. While the median core count has not changed in the last two years, the steady change of the mean core count is plainly seen.
+As a summary statistic we can also look to the median and mean core counts of each list. While the median core count has not changed in the last two years, the  mean core count has increased from roughly 8 to 10.  
 
 
-```{r, echo=FALSE, results="asis", fig.align='center'}
+```{r, echo=FALSE, fig.align='center', results="asis"}
     
     ## create table
     ## note need to control for NA's in some cases
@@ -832,11 +938,11 @@ The processor plays a big role in the supercomputer. Here, to simplify, I have t
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=12), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey80'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "grey80"),
-        panel.grid.minor = element_line(colour = "grey80"),
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom")
 
@@ -891,13 +997,13 @@ The processor plays a big role in the supercomputer. Here, to simplify, I have t
     
     ## draw the power lines
     for (i in -1:2){
-    p <- p + geom_abline(intercept=isopowerline_ab(2*10^-i), colour = "grey95", size = 0.5, alpha=0.5, linetype=2)
+    p <- p + geom_abline(intercept=isopowerline_ab(2*10^-i), colour = "grey65", size = 0.5, alpha=0.5, linetype=2)
     }
     #print(p)
     
     ##draw the exascalar lines
     for (i in 0:7) {
-        p <- p + geom_abline(intercept = isoexaline_ab(-i), slope=-1, colour = "grey95", size = 0.5, alpha=0.5, linetype=2)
+        p <- p + geom_abline(intercept = isoexaline_ab(-i), slope=-1, colour = "grey65", size = 0.5, alpha=0.5, linetype=2)
     }
   
     ## print the graph
@@ -947,11 +1053,11 @@ Encoding the __aceeleratorcoprocessor__ data from the Green500 list highlights i
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=12), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey80'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "grey80"),
-        panel.grid.minor = element_line(colour = "grey80"),
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -1009,13 +1115,13 @@ Encoding the __aceeleratorcoprocessor__ data from the Green500 list highlights i
     
     ## draw the power lines
     for (i in -1:2){
-    p <- p + geom_abline(intercept=isopowerline_ab(2*10^-i), colour = "grey95", size = 0.5, alpha=0.5, linetype=2)
+    p <- p + geom_abline(intercept=isopowerline_ab(2*10^-i), colour = "grey65", size = 0.5, alpha=0.5, linetype=2)
     }
     #print(p)
     
     ##draw the exascalar lines
     for (i in 0:7) {
-        p <- p + geom_abline(intercept = isoexaline_ab(-i), slope=-1, colour = "grey95", size = 0.5, alpha=0.5, linetype=2)
+        p <- p + geom_abline(intercept = isoexaline_ab(-i), slope=-1, colour = "grey65", size = 0.5, alpha=0.5, linetype=2)
     }
   
     ## print the graph
@@ -1056,11 +1162,11 @@ Another interesting trend is the total number of cores. Since this is an extrins
         axis.text=element_text(size=10, color="black"),
         axis.title=element_text(size=10), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey92'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "grey92"),
-        panel.grid.minor = element_line(colour = "grey92"),
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -1073,7 +1179,7 @@ Another interesting trend is the total number of cores. Since this is an extrins
     ## add axis scale labels and title
     p <- p + scale_x_discrete(breaks = 1:5, labels=c("1e+01","1e+02","1e+03","1e+04","1e+05")) 
     p <- p + scale_y_discrete(breaks = 8:12, labels=c("1e+08","1e+09","1e+10","1e+11","1e+12")) 
-    p <- p + ggtitle("June 2015 and November 2012 Exascalar (Total Cores)")
+    p <- p + ggtitle("June 2015 and June 2013 Exascalar (Total Cores)")
 
     ## annotate source
 
@@ -1160,11 +1266,11 @@ Here we can see where Accelerator Processors (GPUs) are making their way into th
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=16, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'grey80'),
+        panel.background = element_rect(fill = 'palegoldenrod'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "grey80"),
-        panel.grid.minor = element_line(colour = "grey80"),
+        panel.grid.major = element_line(colour = "palegoldenrod"),
+        panel.grid.minor = element_line(colour = "palegoldenrod"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -1220,13 +1326,13 @@ Here we can see where Accelerator Processors (GPUs) are making their way into th
     
     ## draw the power lines
     for (i in -1:2){
-    p <- p + geom_abline(intercept=isopowerline_ab(2*10^-i), colour = "grey95", size = 0.5, alpha=0.5, linetype=2)
+    p <- p + geom_abline(intercept=isopowerline_ab(2*10^-i), colour = "grey65", size = 0.5, alpha=0.5, linetype=2)
     }
     #print(p)
     
     ##draw the exascalar lines
     for (i in 0:7) {
-        p <- p + geom_abline(intercept = isoexaline_ab(-i), slope=-1, colour = "grey95", size = 0.5, alpha=0.5, linetype=2)
+        p <- p + geom_abline(intercept = isoexaline_ab(-i), slope=-1, colour = "grey65", size = 0.5, alpha=0.5, linetype=2)
     }
   
     ## print the graph

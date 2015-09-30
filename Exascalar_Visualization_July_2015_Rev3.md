@@ -1,6 +1,6 @@
 # June 2015 Exascalar
-Winston Saunders  
-Sept 16, 2015  
+Winston A. Saunders  
+29 Sept 2015  
 ---
 
 
@@ -47,7 +47,7 @@ In the plot below points from June 2015 are smaller red dots, points with empty 
 
 ###Reaching back: Comparing to June 2013
 
-To emphasize the massive changes in the population of the top supercomputers, it's instructive to compare not only to the last iteration, but also the last iteration where the #1 Supercomputer changed, two years ago in June 2013. In intervening years the minimum perforamnce needed to make the Top500 has increased over 50%. In addition, the maximum efficiency has increased by about the same magnitude. This neatly emphasizes why the _population_ holds as much (and perhaps more) interest as the top one or two systems. 
+To emphasize the massive changes in the population of the top supercomputers, it's instructive to compare not only to the last iteration, but also the last iteration where the #1 Supercomputer changed, two years ago in June 2013. In intervening years the minimum performance needed to make the Top500 has increased over 50%. In addition, the maximum efficiency has increased by about the same magnitude. This neatly emphasizes why the _population_ holds as much (and perhaps more) interest as the top one or two systems. 
 
 
 ```
@@ -56,6 +56,13 @@ To emphasize the massive changes in the population of the top supercomputers, it
 
 <img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-4-1.png" title="" alt="" style="display: block; margin: auto;" />
 
+###Year of Appearance
+
+Finally, the year systems were added to the list shows that the evolution of both the Top500 and Green500 is far less uniform within the population. In teh graph below the newest systems, rather than being clutered at highest efficiency and performance, are distributed more or less uniformly throughout the population. And while the cluster of high power top performance systems are getting a little long in the tooth, there are serveral newer systems with powers over 2.0 MWatt with lower than peak efficiency. 
+
+<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-5-1.png" title="" alt="" style="display: block; margin: auto;" />
+
+
 ##Key Indicators June 2015 Lists
 
 Exascalar, as visulaized by above, is descriptive of the _population_ of supercomputers. Here ia a list of some of the key systems. Note that Exascalar spans from the highest performance to the lowest efficiency system.
@@ -63,7 +70,7 @@ Exascalar, as visulaized by above, is descriptive of the _population_ of superco
 
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Tue Sep 29 19:41:19 2015 -->
+<!-- Tue Sep 29 20:55:36 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Exa Rank </th> <th> Exascalar </th> <th> Performance Rank </th> <th> Efficiency Rank </th> <th> rmax (mflops) </th> <th> power (kW) </th> <th> efficiency (mflops/Watt) </th>  </tr>
   <tr> <td align="right"> Top Exascalar </td> <td align="right">   1 </td> <td align="right"> -2.04 </td> <td align="right">   1 </td> <td align="right">  83 </td> <td align="right"> 33862700.00 </td> <td align="right"> 17808.00 </td> <td align="right"> 1901.54 </td> </tr>
@@ -97,14 +104,15 @@ table {
     font: 12px arial, sans-serif;
 }
 th, td {
-    
+    border: 2px solid black;
     padding: 5px;
+    text-align: center;
 }
 </style>
 
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Tue Sep 29 19:41:20 2015 -->
+<!-- Tue Sep 29 20:55:36 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Exa Rank </th> <th> Exascalar </th> <th> Performance Rank </th> <th> Efficiency Rank </th> <th> rmax (mflops) </th> <th> power (kW) </th> <th> efficiency (mflops/Watt) </th>  </tr>
   <tr> <td align="right"> Top Exascalar </td> <td align="right">   7 </td> <td align="right"> -2.59 </td> <td align="right">   7 </td> <td align="right">  75 </td> <td align="right"> 5536990.00 </td> <td align="right"> 2834.00 </td> <td align="right"> 1953.77 </td> </tr>
@@ -138,22 +146,22 @@ In this section we visually explore different influencers of the supercomputer p
 This graph, showing the the side by side comparison of the June 2013 and current June 2015 plots shows the evolution in cores per socket as a shift to redder data points in the latter graph. This encodes the __coressocket__ data from the Top500 list.  
 The side-by-side comparison here also highlights how the IBM Power systems, so dominant in both efficiency and performance, in the Novermber 2012 list, have been matched and now exceeded by alternative architectures. In particular, the role of GPU and GPU architecture will become apparent in the analysis below.  
 
-<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-9-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-10-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 ###Core Count Histogram
 
 The steady shift in core count is shown clearly in the histrogram below. 
 
 
-<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-10-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-11-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 ###Table of Core Count mean
 
-As a summary statistic we can also look to the median and mean core counts of each list. While the median core count has not changed in the last two years, the steady change of the mean core count is plainly seen.
+As a summary statistic we can also look to the median and mean core counts of each list. While the median core count has not changed in the last two years, the  mean core count has increased from roughly 8 to 10.  
 
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Tue Sep 29 19:41:23 2015 -->
+<!-- Tue Sep 29 20:55:40 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Date </th> <th> Median Cores </th> <th> Mean Cores </th>  </tr>
   <tr> <td align="right"> 1 </td> <td> Jun2013 </td> <td> 8 </td> <td> 7.958 </td> </tr>
@@ -166,26 +174,26 @@ As a summary statistic we can also look to the median and mean core counts of ea
 
 The processor plays a big role in the supercomputer. Here, to simplify, I have taken the __processorgeneration__ data and simplified it to capture only the manufacturer. The near ubiquity of Intel processors is evident.
 
-<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-12-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-13-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 ##Accelerator Co-Processor
 
 Encoding the __aceeleratorcoprocessor__ data from the Green500 list highlights interesting differentiation among different manufacturers very clearly. For the sake of clarity list elements have been reduced to just the manufacturer.
 
-<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-13-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-14-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 ##Total Number of Cores
 
 Another interesting trend is the total number of cores. Since this is an extrinsic parameter, it's best to encode the logarithm. Again, the shift up in performance, and the shift toward higher overall core count is apparent. The __totalcores__ data from the Top500 list are used.
 
-<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-14-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-15-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 
 ##Accelerator Processor Cores
 
 Here we can see where Accelerator Processors (GPUs) are making their way into the Top500 population. While high core count systems play an obvious role in high perfoormance, lower core counts have an interesting play at the high efficiency end (even if they have not yet achieved scale). Here the __acceleratorcoprocessor__ data from the Top500 are encoded.
 
-<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-15-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-16-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 
 #Summary
