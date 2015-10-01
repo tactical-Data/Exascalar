@@ -92,7 +92,7 @@ This analysis is done independently and reflects my opinions alone. In particula
 
 This section focuses on the June 2015 lists and the Exascalar ranking of the data. 
 
-##June 2015 Exascalar Plot
+##Exascalar Plot
 
 The easiest way to visualize change in the Top500 and Green500 lists is to overlay the Exascalar plots of November 2014 with that of June 2015.  
 
@@ -146,11 +146,11 @@ library(ggplot2)
         axis.text=element_text(size=14, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=18, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod")
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2")
         )
 
 
@@ -218,7 +218,7 @@ library(ggplot2)
 
 ```
 
-###Reaching back: Comparing to June 2013
+##Reaching back: Comparing June 2015 to June 2013
 
 To emphasize the massive changes in the population of the top supercomputers, it's instructive to compare not only to the last iteration, but also the last iteration where the #1 Supercomputer changed, two years ago in June 2013. In intervening years the minimum performance needed to make the Top500 has increased over 50%. In addition, the maximum efficiency has increased by about the same magnitude. This neatly emphasizes why the _population_ holds as much (and perhaps more) interest as the top one or two systems. 
 
@@ -251,7 +251,7 @@ To emphasize the massive changes in the population of the top supercomputers, it
     ## alpha = 0.8 helps visually recognize where points overlap
     p <- p + geom_point(alpha=0.8)
 
-    p <- p + scale_colour_manual(name='List',values=c("2015-06-01"="darkred","2013-06-01"="darkgreen"))
+    p <- p + scale_colour_manual(name='List',values=c("2015-06-01"="darkred","2013-06-01"="blue3"))
     p <- p + scale_shape_manual(name='List',values=c("2015-06-01"=20,"2013-06-01"=1))
     p <- p + scale_size_manual(name='List',values=c("2015-06-01"=4,"2013-06-01"=4))
 
@@ -260,11 +260,11 @@ To emphasize the massive changes in the population of the top supercomputers, it
         axis.text=element_text(size=14, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=18, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod")
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2")
         )
 
 
@@ -332,11 +332,11 @@ To emphasize the massive changes in the population of the top supercomputers, it
 
 ```
 
-###Year of Appearance
+##Year of Appearance
 
 Finally, the year systems were added to the list shows that the evolution of both the Top500 and Green500 is far less uniform within the population. In the graph below the __age__ of systems is plotted as $age = 2016 - year.t$. The newest systems, rather than being clutered at highest efficiency and performance, are distributed more or less uniformly throughout the population. And while the cluster of high power top performance systems are getting a little long in the tooth, there are serveral newer systems with powers over 2.0 MWatt with lower than peak efficiency. 
 
-```{r, echo=FALSE, fig.align='center', fig.height=7.25, fig.width=7.75, warning=FALSE}
+```{r, echo=FALSE, fig.align='center', fig.height=6, fig.width=7.1, warning=FALSE}
 
 ## EXASCALAR PLOT
 
@@ -366,11 +366,11 @@ Finally, the year systems were added to the list shows that the evolution of bot
         axis.text=element_text(size=14, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=18, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="right"
         )
@@ -445,7 +445,7 @@ Finally, the year systems were added to the list shows that the evolution of bot
 
 By comparison, here is the plot for the 2013 list. 
 
-```{r, echo=FALSE, fig.align='center', fig.height=7.25, fig.width=7.75, warning=FALSE}
+```{r, echo=FALSE, fig.align='center', fig.height=6, fig.width=7.1, warning=FALSE}
 
 ## EXASCALAR PLOT
 
@@ -475,11 +475,11 @@ By comparison, here is the plot for the 2013 list.
         axis.text=element_text(size=14, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=18, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="right"
         )
@@ -614,7 +614,7 @@ print(temptable, type="html", size="small")
 
 ##Key New Entrants June 2015 
 
-Of the _new_ entrants its interesting to note the same parameters as above as a kind of bound on the population of the newest systems. It's interesting to note in this particular year new systems occupy both the highest and lowest efficiency. 
+Of the _new_ entrants its interesting to note in this particular year new systems occupy both the highest and lowest efficiency. 
 
 ```{r, echo=FALSE} 
 
@@ -665,7 +665,7 @@ Exascalar is useful for visualizing trends in the population. The graphs below i
 
 THe trend of the Efficiency of the #1 Top500 and the T #1 Green500 lists is interesting in that is shows "fits and starts" of the Top500 systme as it jumps to new tiers of efficiency versus the stead evolution of the Green500 systems. It's interesting to note that the gap in efficiency between the two systems appears to be at an alltime high, suggesting another jump may soon be in our future.
 
-```{r, 'date trend eff', echo=FALSE, fig.align="center"}
+```{r, 'date trend eff', echo=FALSE, fig.align="center", fig.height=4, fig.width=6}
 
     ##
     ## Generate graph of delta between efficiency of top performance and top efficiency system.
@@ -716,7 +716,7 @@ THe trend of the Efficiency of the #1 Top500 and the T #1 Green500 lists is inte
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
         panel.grid.major = element_line(colour = "white"),
@@ -742,7 +742,7 @@ THe trend of the Efficiency of the #1 Top500 and the T #1 Green500 lists is inte
 
 We can also look at progress of the top systems along the Exascalar parameter. Note here that jumps in the Top500 correlate to when the Green500 system is closest to the Top500 curve. It's not surprising (indeed it is expected), but the visualization helps highlight the behavior. 
 
-```{r, 'date trend exa', echo=FALSE, fig.align="center", warning=FALSE}
+```{r, 'date trend exa', echo=FALSE, fig.align="center", warning=FALSE, fig.height=4, fig.width=6}
 
     ## PLOT EXASCALAR TREND
     ## Generate graph of delta between efficiency of top performance and top efficiency system.
@@ -791,7 +791,7 @@ We can also look at progress of the top systems along the Exascalar parameter. N
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
         panel.grid.major = element_line(colour = "white"),
@@ -812,6 +812,8 @@ We can also look at progress of the top systems along the Exascalar parameter. N
 
 
 ```
+
+
 
 #Technology Trends
 
@@ -852,11 +854,11 @@ The side-by-side comparison here also highlights how the IBM Power systems, so d
         axis.text=element_text(size=10, color="black"),
         axis.title=element_text(size=10), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -963,7 +965,7 @@ The steady shift in core count is shown clearly in the histrogram below.
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=16, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
         panel.grid.major = element_line(colour = "antiquewhite"),
@@ -1061,11 +1063,11 @@ The processor plays a big role in the supercomputer. Here, to simplify, I have t
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=12), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom")
 
@@ -1176,11 +1178,11 @@ Encoding the __aceeleratorcoprocessor__ data from the Green500 list highlights i
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=12), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -1285,11 +1287,11 @@ Another interesting trend is the total number of cores. Since this is an extrins
         axis.text=element_text(size=10, color="black"),
         axis.title=element_text(size=10), 
         plot.title = element_text(size=14, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -1389,11 +1391,11 @@ Here we can see where Accelerator Processors (GPUs) are making their way into th
         axis.text=element_text(size=12, color="black"),
         axis.title=element_text(size=14), 
         plot.title = element_text(size=16, face="bold", vjust=2),
-        panel.background = element_rect(fill = 'palegoldenrod'),
+        panel.background = element_rect(fill = 'bisque2'),
         axis.title.x = element_text(color="black", vjust=-0.45),
         axis.title.y = element_text(color="black" , vjust=0.45),
-        panel.grid.major = element_line(colour = "palegoldenrod"),
-        panel.grid.minor = element_line(colour = "palegoldenrod"),
+        panel.grid.major = element_line(colour = "bisque2"),
+        panel.grid.minor = element_line(colour = "bisque2"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position="bottom"
         )
@@ -1464,7 +1466,7 @@ Here we can see where Accelerator Processors (GPUs) are making their way into th
 ```
 
 
-#Summary
+#Summary and Conclusions
 
 While the #1 Supercomputer has remained unchanged for two years, the technology of supercomputing is undergoing rapid evolution. Based on historical trends of the gap between the efficiency of the top peformance and the top efficiency systems, as well as the decreasing difference in Exascalar between the systems, another push to higher performance seems imminent. 
 

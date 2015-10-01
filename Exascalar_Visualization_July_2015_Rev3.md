@@ -35,7 +35,7 @@ This analysis is done independently and reflects my opinions alone. In particula
 
 This section focuses on the June 2015 lists and the Exascalar ranking of the data. 
 
-##June 2015 Exascalar Plot
+##Exascalar Plot
 
 The easiest way to visualize change in the Top500 and Green500 lists is to overlay the Exascalar plots of November 2014 with that of June 2015.  
 
@@ -46,7 +46,7 @@ In the plot below points from June 2015 are smaller red dots, points with empty 
 
 <img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-3-1.png" title="" alt="" style="display: block; margin: auto;" />
 
-###Reaching back: Comparing to June 2013
+##Reaching back: Comparing June 2015 to June 2013
 
 To emphasize the massive changes in the population of the top supercomputers, it's instructive to compare not only to the last iteration, but also the last iteration where the #1 Supercomputer changed, two years ago in June 2013. In intervening years the minimum performance needed to make the Top500 has increased over 50%. In addition, the maximum efficiency has increased by about the same magnitude. This neatly emphasizes why the _population_ holds as much (and perhaps more) interest as the top one or two systems. 
 
@@ -57,7 +57,7 @@ To emphasize the massive changes in the population of the top supercomputers, it
 
 <img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-4-1.png" title="" alt="" style="display: block; margin: auto;" />
 
-###Year of Appearance
+##Year of Appearance
 
 Finally, the year systems were added to the list shows that the evolution of both the Top500 and Green500 is far less uniform within the population. In the graph below the __age__ of systems is plotted as $age = 2016 - year.t$. The newest systems, rather than being clutered at highest efficiency and performance, are distributed more or less uniformly throughout the population. And while the cluster of high power top performance systems are getting a little long in the tooth, there are serveral newer systems with powers over 2.0 MWatt with lower than peak efficiency. 
 
@@ -95,7 +95,7 @@ th, td {
 </style>
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Wed Sep 30 08:22:45 2015 -->
+<!-- Wed Sep 30 20:53:42 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Exa Rank </th> <th> Exascalar </th> <th> Performance Rank </th> <th> Efficiency Rank </th> <th> rmax(mflops) </th> <th> power(kW) </th> <th> efficiency (mflops/Watt) </th>  </tr>
   <tr> <td align="right"> Top Exascalar </td> <td align="right">   1 </td> <td align="right"> -2.04 </td> <td align="right">   1 </td> <td align="right">  83 </td> <td align="right"> 33862700.00 </td> <td align="right"> 17808.00 </td> <td align="right"> 1901.54 </td> </tr>
@@ -109,7 +109,7 @@ th, td {
 
 ##Key New Entrants June 2015 
 
-Of the _new_ entrants its interesting to note the same parameters as above as a kind of bound on the population of the newest systems. It's interesting to note in this particular year new systems occupy both the highest and lowest efficiency. 
+Of the _new_ entrants its interesting to note in this particular year new systems occupy both the highest and lowest efficiency. 
 
 
 
@@ -121,7 +121,7 @@ The median Exascalar of the New Computers is -3.52 compared to the median of all
 
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Wed Sep 30 08:22:45 2015 -->
+<!-- Wed Sep 30 20:53:42 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Exa Rank </th> <th> Exascalar </th> <th> Performance Rank </th> <th> Efficiency Rank </th> <th> rmax (mflops) </th> <th> power (kW) </th> <th> efficiency (mflops/Watt) </th>  </tr>
   <tr> <td align="right"> Top Exascalar </td> <td align="right">   7 </td> <td align="right"> -2.59 </td> <td align="right">   7 </td> <td align="right">  75 </td> <td align="right"> 5536990.00 </td> <td align="right"> 2834.00 </td> <td align="right"> 1953.77 </td> </tr>
@@ -145,6 +145,8 @@ THe trend of the Efficiency of the #1 Top500 and the T #1 Green500 lists is inte
 We can also look at progress of the top systems along the Exascalar parameter. Note here that jumps in the Top500 correlate to when the Green500 system is closest to the Top500 curve. It's not surprising (indeed it is expected), but the visualization helps highlight the behavior. 
 
 <img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/date trend exa-1.png" title="" alt="" style="display: block; margin: auto;" />
+
+
 
 #Technology Trends
 
@@ -170,7 +172,7 @@ As a summary statistic we can also look to the median and mean core counts of ea
 
 
 <!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
-<!-- Wed Sep 30 08:22:49 2015 -->
+<!-- Wed Sep 30 20:53:45 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> Date </th> <th> Median Cores </th> <th> Mean Cores </th>  </tr>
   <tr> <td align="right"> 1 </td> <td> Jun2013 </td> <td> 8 </td> <td> 7.958 </td> </tr>
@@ -205,7 +207,7 @@ Here we can see where Accelerator Processors (GPUs) are making their way into th
 <img src="Exascalar_Visualization_July_2015_Rev3_files/figure-html/unnamed-chunk-17-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 
-#Summary
+#Summary and Conclusions
 
 While the #1 Supercomputer has remained unchanged for two years, the technology of supercomputing is undergoing rapid evolution. Based on historical trends of the gap between the efficiency of the top peformance and the top efficiency systems, as well as the decreasing difference in Exascalar between the systems, another push to higher performance seems imminent. 
 
